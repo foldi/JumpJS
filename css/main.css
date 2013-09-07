@@ -1,0 +1,17 @@
+html {
+
+}
+
+.statusMessage {
+	position: fixed;
+	top: 0;
+	left: 0;
+	color: #999;
+	font-family: 'Helvetica Neue';
+	font-size: 1em;
+	padding: 1em;
+}
+
+.statusMessage .emphasis {
+	color: #ddd;
+}
