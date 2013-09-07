@@ -80,7 +80,7 @@ The default size of the interaction box is 300mm high x 300mm wide x 300mm deep.
 
 To change the size or center, pass them as properties of an options object when creating a new Jumper.
 
-```html
+```javascript
 var jump = new Jump.Jumper({
 	center: [0, 100, 0],
   size: [200, 200, 200]
@@ -89,20 +89,33 @@ var jump = new Jump.Jumper({
 
 You can also supress the Leap status message by passing false to the init() function.
 
-```html
+```javascript
 jump.init(false);
 ```
 
+Building this project
 ======
+
+This project uses Grunt. To build the project first install the node modules.
+
+```
+npm install
+```
+
+Next, run grunt.
+
+```
+grunt
+```
 
 A pre-commit hook is defined in /pre-commit that runs jshint. To use the hook, run the following:
 
+```
 ln -s ../../pre-commit .git/hooks/pre-commit
+```
 
 A post-commit hook is defined in /post-commit that runs the Plato complexity analysis tools. To use the hook, run the following:
 
+```
 ln -s ../../post-commit .git/hooks/post-commit
-
-To install Plato, run the following.
-
-npm install -g plato
+```
