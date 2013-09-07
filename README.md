@@ -78,10 +78,10 @@ Options
 
 The default size of the interaction box is 300mm high x 300mm wide x 300mm deep. The default center of the interaction box is 0mm high x 150mm wide x 0mm deep. This point is equidistant from all sides of the box.
 
-To change the size or center, pass them as properties of an options object when creating a new Jump.
+To change the size or center, pass them as properties of an options object when creating a new Jumper.
 
 ```html
-var jump = new Jumper.Jump({
+var jump = new Jump.Jumper({
 	center: [0, 100, 0],
   size: [200, 200, 200]
 }); 
