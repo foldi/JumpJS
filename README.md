@@ -96,7 +96,7 @@ jump.init(false);
 Building this project
 ======
 
-This project uses Grunt. To build the project first install the node modules.
+This project uses [Grunt](http://gruntjs.com). To build the project first install the node modules.
 
 ```
 npm install
