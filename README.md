@@ -5,6 +5,8 @@ Use JumpJS with LeapJS and a Leap motion device (http://www.leapmotion.com) to e
 
 The optional pointer depends on FloraJS and Burner. Once the browser recognizes the Leap, you should see "Leap: ready" appear in the top left corner. Just point one finger over the device and watch the pointer track your finger.
 
+Find examples in the 'public' folder or view them in action at http://foldi.github.io/JumpJS/.
+
 Examples
 ======
 
@@ -26,7 +28,7 @@ To simply set up an interaction box and a status message, create a Jump instance
       Jump.PubSub.subscribe('animFrame', function(frame) {
         // work with frame data here
       });
-      jumper.init();     
+      jumper.init();
     </script>
   </body>
 </html>
@@ -65,7 +67,7 @@ To add a pointer, create a Flora system and initialize it with an agent. IMPORTA
           jumper: true
         });
 
-      });      
+      });
     </script>
   </body>
 </html>
@@ -84,7 +86,7 @@ To change the size or center, pass them as properties of an options object when 
 var jump = new Jump.Jumper({
 	center: [0, 100, 0],
   size: [200, 200, 200]
-}); 
+});
 ```
 
 You can also supress the Leap status message by passing false to the init() function.
