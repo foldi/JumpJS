@@ -1,9 +1,7 @@
 /**
- * @namespace
- * @requires Leapjs
- */
-/**
  * Creates a new Jumper.
+ * @constructor
+ * @requires Leapjs
  * @param {Object} opt_interactionBoxOptions Initial interaction box options.
  */
 function Jumper(opt_interactionBoxOptions) {
@@ -84,6 +82,7 @@ Jumper.prototype.init = function(opt_createStatusMessage) {
 
 /**
  * Handles the animationFrame controller event.
+ * @param {Object} frame Frame data.
  */
 Jumper.prototype.animFrame = function(frame) {
 

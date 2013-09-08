@@ -33,6 +33,7 @@ StatusMessage.prototype.displayMessage = function(msg, opt_static) {
 
 /**
  * Fades status message DOM element.
+ * @private
  */
 StatusMessage.prototype._update = function() {
 	if (this.opacity > 0) {

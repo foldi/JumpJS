@@ -1,4 +1,4 @@
-/*! Jump v1.0.0 - 2013-09-06 09:09:47 
+/*! Jump v1.0.0 - 2013-09-08 11:09:31 
  *  Vince Allen 
  *  Brooklyn, NY 
  *  vince@vinceallen.com 
@@ -11,10 +11,6 @@ var Jump = {}, exports = Jump;
 
 "use strict";
 
-/**
- * Creates a new Jumper.
- * @param {Object} opt_interactionBoxOptions Initial interaction box options.
- */
 function Jumper(opt_interactionBoxOptions) {
 
   if (!Leap) {
@@ -93,10 +89,13 @@ Jumper.prototype.init = function(opt_createStatusMessage) {
 
 /**
  * Handles the animationFrame controller event.
+ * @param {Object} frame Frame data.
  */
 Jumper.prototype.animFrame = function(frame) {
 
   var jumper, hands = frame.hands;
+
+  exports.PubSub.publish('animFrame', frame);
 
   if (!Burner) {
     return;
@@ -149,6 +148,13 @@ exports.Jumper = Jumper;
 
 var PubSub = {};
 
+/**
+ * Subscribes a callback to an event.
+ * @function subscribe
+ * @memberof PubSub
+ * @param {string} ev An event type.
+ * @param {Function} callback A function to call when the event is published.
+ */
 PubSub.subscribe = function (ev, callback) {
   // Create _callbacks object, unless it already exists
   var calls = this._callbacks || (this._callbacks = {});
@@ -159,6 +165,13 @@ PubSub.subscribe = function (ev, callback) {
   return this;
 };
 
+/**
+ * Publishes an event. Subscribed callbacks will be invoked. Pass an event
+ * name as the first argument. All other arguments will be passed to all
+ * invoked callbacks.
+ * @function publish
+ * @memberof PubSub
+ */
 PubSub.publish = function () {
   // Turn arguements into a real array
   var args = Array.prototype.slice.call(arguments, 0);
@@ -213,6 +226,7 @@ StatusMessage.prototype.displayMessage = function(msg, opt_static) {
 
 /**
  * Fades status message DOM element.
+ * @private
  */
 StatusMessage.prototype._update = function() {
 	if (this.opacity > 0) {
