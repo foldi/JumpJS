@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Index</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Index</h1>
+    
+    
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>Jumper</h1>
+
+<p>Use JumpJS with LeapJS and a Leap motion device (http://www.leapmotion.com) to easily create a Leap interaction box that maps to your browser&#39;s viewport. Optionally, create a status message as well as a pointer corresponding to the first finger detected by the device.</p>
+
+<p>The optional pointer depends on FloraJS and Burner. Once the browser recognizes the Leap, you should see &quot;Leap: ready&quot; appear in the top left corner. Just point one finger over the device and watch the pointer track your finger.</p>
+
+<p>Find examples in the &#39;public&#39; folder or view them in action at http://foldi.github.io/JumpJS/.</p>
+
+<h1>Examples</h1>
+
+<p>To simply set up an interaction box and a status message, create a Jump instance and initialize it.</p>
+
+<p><code>html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta http-equiv=&#39;content-type&#39; content=&#39;text/html; charset=UTF-8&#39; /&gt;
+    &lt;title&gt;JumpJS | Simple&lt;/title&gt;
+    &lt;link href=&#39;css/Jump.min.css&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39; charset=&#39;utf-8&#39; /&gt;
+    &lt;script src=&#39;scripts/leap.js&#39; type=&#39;text/javascript&#39; charset=&#39;utf-8&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;scripts/Jump.min.js&#39; type=&#39;text/javascript&#39; charset=&#39;utf-8&#39;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script type=&#39;text/javascript&#39; charset=&#39;utf-8&#39;&gt;
+      var jumper = new Jump.Jumper();
+      Jump.PubSub.subscribe(&#39;animFrame&#39;, function(frame) {
+        // work with frame data here
+      });
+      jumper.init();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></p>
+
+<p>To add a pointer, create a Flora system and initialize it with an agent. IMPORTANT: the agent must have a &#39;jumper&#39; property set to true.</p>
+
+<p><code></code>`html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta http-equiv=&#39;content-type&#39; content=&#39;text/html; charset=UTF-8&#39; /&gt;
+    &lt;title&gt;JumpJS | Pointer&lt;/title&gt;
+    &lt;link href=&#39;css/burner.css&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39; charset=&#39;utf-8&#39; /&gt;
+    &lt;link href=&#39;css/flora.css&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39; charset=&#39;utf-8&#39; /&gt;
+    &lt;link href=&#39;css/Jump.min.css&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39; charset=&#39;utf-8&#39; /&gt;
+    &lt;script src=&#39;scripts/leap.js&#39; type=&#39;text/javascript&#39; charset=&#39;utf-8&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;scripts/burner.js&#39; type=&#39;text/javascript&#39; charset=&#39;utf-8&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;scripts/flora.js&#39; type=&#39;text/javascript&#39; charset=&#39;utf-8&#39;&gt;&lt;/script&gt;
+    &lt;script src=&#39;scripts/Jump.min.js&#39; type=&#39;text/javascript&#39; charset=&#39;utf-8&#39;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script type=&#39;text/javascript&#39; charset=&#39;utf-8&#39;&gt;
+      var jumper = new Jump.Jumper();
+      jumper.init();</p>
+
+<pre><code>  Burner.System.init(function() {
+
+    var pointer = this.add(&#39;Agent&#39;, {
+      width: 20,
+      height: 20,
+      mass: 2,
+      color: [255, 255, 255],
+      borderRadius: 100,
+      opacity: 0.75,
+      jumper: true
+    });
+
+  });
+&lt;/script&gt;</code></pre>
+
+<p>  &lt;/body&gt;
+&lt;/html&gt;
+<code></code>`</p>
+
+<p>Tweak the properties of the agent to adjust the style of the pointer.</p>
+
+<h1>Options</h1>
+
+<p>The default size of the interaction box is 300mm high x 300mm wide x 300mm deep. The default center of the interaction box is 0mm high x 150mm wide x 0mm deep. This point is equidistant from all sides of the box.</p>
+
+<p>To change the size or center, pass them as properties of an options object when creating a new Jumper.</p>
+
+<p><code>javascript
+var jump = new Jump.Jumper({
+	center: [0, 100, 0],
+  size: [200, 200, 200]
+});
+</code></p>
+
+<p>You can also supress the Leap status message by passing false to the init() function.</p>
+
+<p><code>javascript
+jump.init(false);
+</code></p>
+
+<h1>Building this project</h1>
+
+<p>This project uses <a href="http://gruntjs.com">Grunt</a>. To build the project first install the node modules.</p>
+
+<p><code>
+npm install
+</code></p>
+
+<p>Next, run grunt.</p>
+
+<p><code>
+grunt
+</code></p>
+
+<p>A pre-commit hook is defined in /pre-commit that runs jshint. To use the hook, run the following:</p>
+
+<p><code>
+ln -s ../../pre-commit .git/hooks/pre-commit
+</code></p>
+
+<p>A post-commit hook is defined in /post-commit that runs the Plato complexity analysis tools. To use the hook, run the following:</p>
+
+<p><code>
+ln -s ../../post-commit .git/hooks/post-commit
+</code></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Jumper.html">Jumper</a></li><li><a href="StatusMessage.html">StatusMessage</a></li></ul><h3>Namespaces</h3><ul><li><a href="PubSub.html">PubSub</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0</a> on Sun Sep 08 2013 11:50:22 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
