@@ -90,7 +90,7 @@ Jumper.prototype.animFrame = function(frame) {
 
   exports.PubSub.publish('animFrame', frame);
 
-  if (!Burner) {
+  if (typeof Burner === 'undefined') {
     return;
   }
 

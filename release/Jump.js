@@ -1,4 +1,4 @@
-/*! Jump v1.0.0 - 2013-09-08 11:09:31 
+/*! Jump v1.0.0 - 2013-09-11 03:09:56 
  *  Vince Allen 
  *  Brooklyn, NY 
  *  vince@vinceallen.com 
@@ -97,7 +97,7 @@ Jumper.prototype.animFrame = function(frame) {
 
   exports.PubSub.publish('animFrame', frame);
 
-  if (!Burner) {
+  if (typeof Burner === 'undefined') {
     return;
   }
 

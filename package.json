@@ -1,6 +1,6 @@
 {
   "name": "Jump",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use JumpJS with LeapJS and a Leap motion device to easily create a Leap interaction box that maps to your browser's viewport.",
   "main": "src/main.js",
   "scripts": {
