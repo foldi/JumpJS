@@ -29,16 +29,35 @@
           jumper: true
         });
 
-        var colorPal = new Flora.ColorPalette();
-
-        colorPal.addColor({
+        var palette = new Flora.ColorPalette();
+        palette.addColor({
           min: 12,
           max: 24,
-          startColor: [243, 76, 7],
-          endColor: [103, 36, 0]
+          startColor: [196, 213, 86],
+          endColor: [166, 183, 56]
+        }).addColor({
+          min: 12,
+          max: 24,
+          startColor: [56, 139, 126],
+          endColor: [26, 109, 96]
+        }).addColor({
+          min: 12,
+          max: 24,
+          startColor: [104, 233, 212],
+          endColor: [74, 203, 182]
+        }).addColor({
+          min: 12,
+          max: 24,
+          startColor: [233, 158, 104],
+          endColor: [203, 128, 74]
+        }).addColor({
+          min: 12,
+          max: 24,
+          startColor: [191, 75, 49],
+          endColor: [171, 55, 19]
         });
 
-        for (var i = 0; i < 40; i++) {
+        for (var i = 0; i < 30; i++) {
           var size = Burner.System.getRandomNumber(10, 50);
           var location = new Burner.Vector(Burner.System.firstWorld().width / 2, Burner.System.firstWorld().height / 2);
           var offset = new Burner.Vector(1, 1);
@@ -46,15 +65,40 @@
           offset.rotate(Burner.System.getRandomNumber(0, 360));
           offset.mult(Burner.System.getRandomNumber(10, 50));
           location.add(offset);
-          this.add('Agent', {
+          var agent = this.add('Agent', {
             location: location,
-            width: size * 0.8,
+            width: size,
             height: size,
             mass: size * 2,
-            opacity: Burner.System.map(size, 10, 50, 0.9, 0.7),
+            opacity: Burner.System.map(size, 10, 50, 1, 1),
             flocking: true,
-            color: colorPal.getColor(),
-            seekTarget: pointer
+            color: palette.getColor(),
+            seekTarget: pointer,
+            borderRadius: 100,
+            borderWidth: i % 2 ? size / 4 : size / 2,
+            borderStyle: 'double',
+            borderColor: [255, 255, 255],
+            boxShadowBlur: 0,
+            boxShadowSpread: 0,
+            boxShadowColor: [255, 242, 204],
+            beforeStep: function() {
+              this.opacity = Burner.System.map(this.velocity.mag(), 0, this.maxSpeed, 1, 0);
+            }
+          });
+          this.add('Point', {
+            width: Burner.System.map(size, 10, 50, size * 50, size),
+            height: 1,
+            borderStyle: 'none',
+            borderRadius: 0,
+            zIndex: 1,
+            pointToDirection: true,
+            parent: agent,
+            checkWorldEdges: false,
+            beforeStep: function() {
+              this.color = this.parent.color;
+              this.angle = this.parent.angle;
+              this.opacity = Burner.System.map(this.parent.velocity.mag(), 0, this.parent.maxSpeed, 0.65, 0);
+            }
           });
         }
       });
