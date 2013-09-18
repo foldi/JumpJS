@@ -126,6 +126,13 @@ Jumper.prototype.animFrame = function(frame) {
   var x = Burner.System.map(norm[0], 0, 1, 0, width);
   var y = Burner.System.map(norm[1], 0, 1, height, 0);
 
+  // scale pointer based on z location
+  var z = Burner.System.map(norm[2], 0, 1, 0.1, 1);
+  jumper.scale = z;
+
+  var o = Burner.System.map(norm[2], 0, 1, 0.25, 1);
+  jumper.opacity = o;
+
   // create and set a target
   var target = {
     location: {

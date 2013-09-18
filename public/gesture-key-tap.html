@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='content-type' content='text/html; charset=UTF-8' />
+    <title>JumpJS | Simple</title>
+    <link href='css/Burner.min.css' rel='stylesheet' type='text/css' charset='utf-8' />
+    <link href='css/Flora.min.css' rel='stylesheet' type='text/css' charset='utf-8' />
+    <link href='css/Jump.min.css' rel='stylesheet' type='text/css' charset='utf-8' />
+    <script src='scripts/leap.js' type='text/javascript' charset='utf-8'></script>
+    <script src='scripts/Burner.min.js' type='text/javascript' charset='utf-8'></script>
+    <script src='scripts/Flora.min.js' type='text/javascript' charset='utf-8'></script>
+    <script src='scripts/Jump.min.js' type='text/javascript' charset='utf-8'></script>
+  </head>
+  <body>
+    <script type='text/javascript' charset='utf-8'>
+      var jumper = new Jump.Jumper();
+      jumper.init();
+      
+      var pointer;
+
+      Burner.System.init(function() {
+
+        pointer = this.add('Agent', {
+          width: 20,
+          height: 20,
+          mass: 2,
+          color: [255, 255, 255],
+          borderRadius: 100,
+          opacity: 0.75,
+          jumper: true
+        });
+
+      });  
+      Jump.PubSub.subscribe('animFrame', function(frame) {
+        if (frame.gestures.length) {
+          var gesture = frame.gestures[0];
+          if (gesture.type === 'keyTap' && gesture.state === 'stop') {
+            var size = pointer.width / 2;
+            Burner.System.add('Agent', {
+              location: new Burner.Vector(pointer.location.x, pointer.location.y),
+              color: [200, 0, 0],
+              width: size,
+              height: size,
+              borderRadius: 100,
+              borderWidth: size / 2,
+              borderStyle: 'double',
+              borderColor: [255, 255, 255],
+              checkWorldEdges: false,
+              opacity: pointer.opacity,
+              scale: pointer.scale,
+              beforeStep: function() {
+                if (this.location.y > this.world.height + this.width / 2) {
+                  Burner.System.destroyItem(this);
+                }
+              }
+            });
+          }
+        }
+      });          
+    </script>
+  </body>
+</html>
